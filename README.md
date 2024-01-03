@@ -1,113 +1,66 @@
-C - Stacks, Queues - LIFO, FIFO
+# Monty Bytecode Interpreter
 
-Project Overview
-This project, C - Stacks, Queues - LIFO, FIFO, is part of Holberton School's curriculum and is meant to be done in teams of 2 people. The team for this project consists of Sarah Boutier and Jonathan Huybrechts. The purpose of this project is to create an interpreter for Monty ByteCodes files.
+This project is a Monty bytecode interpreter written in C. Monty 0.98 is a scripting language that is first compiled into Monty bytecodes, which are then interpreted by this program. This interpreter can handle a variety of operations such as pushing, popping, and performing calculations on a data structure known as a "stack".
 
-Table of Contents
-Project Overview
-Table of Contents
-Project Description
-Learning Objectives
-Requirements
-GitHub Repository
-Data Structures
-Compilation & Output
-Tests
-The Monty Language
-Tasks
-Project Description
-Monty 0.98 is a scripting language that is first compiled into Monty byte codes, similar to Python. It relies on a unique stack with specific instructions to manipulate it. The goal of this project is to create an interpreter for Monty ByteCodes files.
+## Team Members
 
-Monty Byte Code Files
-Files containing Monty byte codes usually have the .m extension. Each line in the file corresponds to an instruction, and there can be any number of spaces before or after the opcode and its argument. Blank lines are allowed in the file.
+- Sarah Boutier
+- Jonathan Huybrechts
 
-Example of Monty byte code file (bytecodes/000.m):
+## Features
 
-plaintext
-Copy code
-push 0
-push 1
-push 2
-push 3
-pall
-Monty byte code files can contain blank lines (empty or spaces only), and any additional text after the opcode or its required argument is not taken into account.
+- Stack (LIFO) and Queue (FIFO) Modes
+- Monty bytecode support
+- Implementation of opcodes: 
+  - `push`: Pushes an element to the stack
+  - `pall`: Prints all the values on the stack
+  - `pint`: Prints the value at the top of the stack
+  - `pop`: Removes the top element of the stack
+  - `swap`: Swaps the top two elements of the stack
+  - `add`: Adds the top two elements of the stack
+  - `nop`: Does nothing
 
-Example of Monty byte code file with blank lines (bytecodes/001.m):
+## Requirements
 
-plaintext
-Copy code
-push 0 Push 0 onto the stack
-push 1 Push 1 onto the stack
+- Ubuntu 20.04 LTS
+- gcc, using the options `-Wall -Werror -Wextra -pedantic`
+- Max one global variable
+- All functions must be included in `monty.h`
 
-push 2
-  push 3
-                   pall
+## Installation
 
-                           
-push 4
+Clone this repository:
+git clone [https://github.com/Miniknacky/holbertonschool-monty.git]
 
-    push 5    push    6        
-pall This is the end of our program. Monty is awesome!
-The Monty Program
-The monty program is used to run Monty byte code files. Its usage is as follows:
+## Compilation
 
-plaintext
-Copy code
-monty file
-file is the path to the file containing Monty byte code instructions.
-The following rules apply when using the monty program:
+Your code will be compiled this way:
 
-If the user does not provide a file or provides more than one argument, print the error message USAGE: monty file, followed by a new line, and exit with the status EXIT_FAILURE.
-
-If the file cannot be opened, print the error message Error: Can't open file <file>, followed by a new line, and exit with the status EXIT_FAILURE, where <file> is the name of the file.
-
-If the file contains an unknown instruction, print the error message L<line_number>: unknown instruction <opcode>, followed by a new line, and exit with the status EXIT_FAILURE, where <line_number> is the line number where the unknown instruction appears.
-
-If malloc fails to allocate memory, print the error message Error: malloc failed, followed by a new line, and exit with status EXIT_FAILURE.
-
-The monty program runs the byte codes line by line and stops if any of the following conditions is met:
-
-It executed every line of the file.
-It encounters an error in the file.
-An error occurs during execution.
-Compilation & Output
-The monty program is compiled using the following command:
-
-plaintext
-Copy code
-gcc -Wall -Werror -Wextra -pedantic *.c -o monty
-Any output from the program must be printed to stdout.
-Any error messages must be printed to stderr.
-Tests
-Collaboration between team members is encouraged for creating a set of tests to ensure the correctness of the program.
-
-Learning Objectives
-By the end of this project, you should be able to explain the following concepts without the help of external resources:
-
-What LIFO and FIFO mean
-What a stack is and when to use it
-What a queue is and when to use it
-Common implementations of stacks and queues
-Common use cases of stacks and queues
-The proper way to use global variables
-Requirements
-Allowed editors: vi, vim, emacs
-All your files will be compiled on Ubuntu 20.04 LTS using gcc, using the options -Wall -Werror -Wextra -pedantic
-All your files should end with a new line
-A README.md file, at the root of the folder of the project, is mandatory
-Your code should use the Betty style. It will be checked using betty-style.pl and betty-doc.pl
-You are allowed to use a maximum of one global variable
-No more than 5 functions per file
-You are allowed to use the C standard library
-The prototypes of all your functions should be included in your header file called monty.h
-Don't forget to push your header file
-All your header files should be include guarded
-GitHub Repository
-There should be one project repository per group. If you clone, fork, or create a project repository with the same name before the second deadline, you risk receiving a score of 0%.
-Data Structures
-Please use the following data structures for this project
+$ gcc -Wall -Werror -Wextra -pedantic *.c -o monty
 
 
+## Usage
 
+./monty file
 
+Where `file` is the path to the file containing Monty byte code.
+
+## Data Structures
+
+The following data structures are used in this project:
+
+### stack_s
+Doubly linked list representation of a stack (or queue).
+
+### instruction_s
+Opcode and its function.
+
+## Testing
+
+Extensive testing is recommended to ensure all parts of the program function as expected.
+
+## Acknowledgments
+
+- Julien Barbier, for the project requirements and guidance.
+- Holberton School, for the project framework and support.
 

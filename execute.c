@@ -10,9 +10,6 @@
 void execute_instruction(char *instruction, stack_t **stack,
 unsigned int line_number)
 {
-	char *opcode;
-	int index = 0;
-
 	instruction_t opcodes[] = {
 	{"push", push},
 	{"pall", pall},
@@ -23,6 +20,9 @@ unsigned int line_number)
 	{"add", add},
 	{NULL, NULL},
 	};
+
+	char *opcode;
+	int index = 0;
 
 	if (!instruction || !stack)
 	{

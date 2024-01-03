@@ -11,7 +11,7 @@ void execute_instruction(char *instruction, stack_t **stack,
 unsigned int line_number)
 {
 	char *opcode;
-	int index;
+	int index = 0;
 
 	instruction_t opcodes[] = {
 	{"push", push},
@@ -41,12 +41,12 @@ unsigned int line_number)
 
 	while (opcodes[index].opcode != NULL)
 	{
-	if (strcmp(opcode, opcodes[index].opcode) == 0)
-	{
-		opcodes[index].f(stack, line_number);
-		return;
-	}
-	index++;
+		if (strcmp(opcode, opcodes[index].opcode) == 0)
+		{
+			opcodes[index].f(stack, line_number);
+			return;
+		}
+		index++;
 	}
 }
 

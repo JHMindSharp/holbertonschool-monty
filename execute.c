@@ -33,7 +33,8 @@ unsigned int line_number)
 			fprintf(stderr, "L%u: Error: usage: push integer\n", line_number);
 			exit(EXIT_FAILURE);
 		}
-        int value = atoi(operand);
+		int value = atoi(operand);
+
 		push(stack, value);
 	}
 	else if (strcmp(opcode, "pall") == 0)

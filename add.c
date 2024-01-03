@@ -13,6 +13,12 @@ void add(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	(*stack)->next->n += (*stack)->n;
-	pop(stack, line_number);
+	stack_t *first = *stack;
+	stack_t *second = first->next;
+	int sum = first->n + second->n;
+
+	second->n = sum;
+	*stack = second;
+
+	free(first);
 }

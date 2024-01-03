@@ -4,14 +4,14 @@
  * free_stack - Frees a stack.
  * @stack: The stack to be freed.
  */
-void free_stack(stack_t *stack)
+void free_stack(stack_t *head)
 {
-	stack_t *temp;
+    stack_t *temp;
 
-	while (stack != NULL)
-	{
-		temp = stack;
-		stack = stack->next;
-		free(temp);
-	}
+    while (head)
+    {
+        temp = head->next;
+        free(head);
+        head = temp;
+    }
 }

@@ -1,3 +1,3 @@
 push 1
 nop
-pall
+push 2

@@ -5,17 +5,17 @@
  * @instruction: The instruction to execute
  * @stack: Pointer to the top of the stack
  * @line_number: The current line number in the bytecode file
+ * Return: nothing
  */
 void execute_instruction(char *instruction, stack_t **stack,
 unsigned int line_number)
 {
+	char *opcode, *operand;
 	if (!instruction || !stack)
 	{
 		fprintf(stderr, "L%u: Error: Invalid instruction or stack\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-
-	char *opcode, *operand;
 
 	opcode = strtok(instruction, " \t\n");
 	operand = strtok(NULL, " \t\n");

@@ -1,3 +1,6 @@
+![MONTY](https://image.noelshack.com/fichiers/2024/01/4/1704324197-dall-e-2024-01-04-00-22-34-a-4k-resolution-image-featuring-monty-bytecode-in-a-neon-style-the-image-showcases-a-large-bright-neon-sign-with-the-words-monty-bytecode-in-bol.jpg)
+
+
 # Monty Bytecode Interpreter
 
 This project is a Monty bytecode interpreter written in C. Monty 0.98 is a scripting language that is first compiled into Monty bytecodes, which are then interpreted by this program. This interpreter can handle a variety of operations such as pushing, popping, and performing calculations on a data structure known as a "stack".

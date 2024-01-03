@@ -9,11 +9,12 @@
  */
 int main(int argc, char *argv[])
 {
+
 	stack_t *stack = NULL;
-	unsigned int line_number = 0;
 	char *line = NULL;
 	size_t line_len = 0;
 	ssize_t read = 0;
+	unsigned int line_number = 0;
 
 	if (argc != 2)
 	{
@@ -34,6 +35,7 @@ int main(int argc, char *argv[])
 		line_number++;
 		execute_instruction(line, &stack, line_number);
 	}
+
 	free_stack(stack);
 	free(line);
 	fclose(file);

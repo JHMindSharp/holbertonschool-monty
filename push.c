@@ -3,12 +3,15 @@
 /**
  * push - Pushes an element onto the stack.
  * @stack: Pointer to the top of the stack.
- * @line_number: The current line number in the bytecode file.
- * @value: The value to push onto the stack.
+ * @n: The value to push onto the stack.
+ *
+ * Description: This function pushes an element with the given value onto the
+ * top of the stack.
  */
-void push(stack_t **stack, unsigned int n)
+void push(stack_t **stack, int n)
 {
 	stack_t *new_node = malloc(sizeof(stack_t));
+
 	if (new_node == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");

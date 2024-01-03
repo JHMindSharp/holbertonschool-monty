@@ -10,7 +10,17 @@
 void execute_instruction(char *instruction, stack_t **stack,
 unsigned int line_number)
 {
+	instruction_t opst[] = {
+	{"push", push},
+	{"pall", pall},
+	{"pint", pint},
+	{"pop", pop},
+	{"swap", swap},
+	{"add", add},
+	{"nop", nop},
+};
 	char *opcode, *operand;
+	int i, num_ops;
 
 	if (!instruction || !stack)
 	{
@@ -27,40 +37,18 @@ unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	if (!opcode)
+	num_ops = sizeof(opst) / sizeof(opst[0]);
+	for (i = 0; i < num_ops; i++)
 	{
-		fprintf(stderr, "L%u: Error: Missing opcode\n", line_number);
-		exit(EXIT_FAILURE);
-	}
-
-	if (strcmp(opcode, "push") == 0)
-	{
-		if (!operand || !is_numeric(operand))
+		if (strcmp(opcode, opst[i].opcode) == 0)
 		{
-			fprintf(stderr, "L%u: Error: usage: push integer\n", line_number);
-			exit(EXIT_FAILURE);
+			opst[i].f(stack, line_number);
+			return;
 		}
-		int value = atoi(operand);
+	}
 
-		push(stack, value);
-	}
-	else if (strcmp(opcode, "pall") == 0)
-		pall(stack, line_number);
-	else if (strcmp(opcode, "nop") == 0)
-		nop(stack, line_number);
-	else if (strcmp(opcode, "add") == 0)
-		add(stack, line_number);
-	else if (strcmp(opcode, "swap") == 0)
-		swap(stack, line_number);
-	else if (strcmp(opcode, "pop") == 0)
-		pop(stack, line_number);
-	else if (strcmp(opcode, "pint") == 0)
-		pint(stack, line_number);
-	else
-	{
-		fprintf(stderr, "L%u: Error: Unknown instruction %s\n", line_number, opcode);
-		exit(EXIT_FAILURE);
-	}
+	fprintf(stderr, "L%u: Error: Unknown instruction %s\n", line_number, opcode);
+	exit(EXIT_FAILURE);
 }
 
 /**

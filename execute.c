@@ -17,13 +17,22 @@ unsigned int line_number)
 		fprintf(stderr, "L%u: Error: Invalid instruction or stack\n", line_number);
 		exit(EXIT_FAILURE);
 	}
+
 	opcode = strtok(instruction, " \t\n");
 	operand = strtok(NULL, " \t\n");
+
 	if (!opcode)
 	{
 		fprintf(stderr, "L%u: Error: Missing opcode\n", line_number);
 		exit(EXIT_FAILURE);
 	}
+
+	if (!opcode)
+	{
+		fprintf(stderr, "L%u: Error: Missing opcode\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
 	if (strcmp(opcode, "push") == 0)
 	{
 		if (!operand || !is_numeric(operand))
@@ -45,6 +54,8 @@ unsigned int line_number)
 		swap(stack, line_number);
 	else if (strcmp(opcode, "pop") == 0)
 		pop(stack, line_number);
+	else if (strcmp(opcode, "pint") == 0)
+		pint(stack, line_number);
 	else
 	{
 		fprintf(stderr, "L%u: Error: Unknown instruction %s\n", line_number, opcode);

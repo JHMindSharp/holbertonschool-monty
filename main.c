@@ -1,5 +1,4 @@
 #include "monty.h"
-<<<<<<< HEAD
 
 /**
  * main - Entry point for Monty bytecode interpreter
@@ -10,36 +9,12 @@
  */
 int main(int argc, char *argv[])
 {
-=======
-/**
- * main - function for monty program
- *
- * @argc: number of arguments of the program
- * @argv: array of opcodes of the monty program
- *
- * Return: 0 on success
-*/
-int main(int argc, char *argv[])
-{
-	instruction_t opcode[] = {
-		{"push", push},
-		{"pall", pall},
-		{"pint", pint},
-		{"pop", pop},
-		{"swap", swap},
-		{"add", add},
-		{"nop", nop},
-		{NULL, NULL},
-	};
-
->>>>>>> 8f556751a7240b6d774419e1d706612ccacd87f7
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 
-<<<<<<< HEAD
 	FILE *file = fopen(argv[1], "r");
 
 	if (file == NULL)
@@ -65,7 +40,4 @@ int main(int argc, char *argv[])
 	fclose(file);
 
 	return (EXIT_SUCCESS);
-=======
-	return(0);
->>>>>>> 8f556751a7240b6d774419e1d706612ccacd87f7
 }

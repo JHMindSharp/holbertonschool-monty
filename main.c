@@ -9,6 +9,7 @@
  */
 int main(int argc, char *argv[])
 {
+
 	stack_t *stack = NULL;
 	char *line = NULL;
 	size_t line_len = 0;

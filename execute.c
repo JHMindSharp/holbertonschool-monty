@@ -38,13 +38,9 @@ unsigned int line_number)
 		push(stack, value);
 	}
 	else if (strcmp(opcode, "pall") == 0)
-	{
 		pall(stack, line_number);
-	}
-    else if (strcmp(opcode, "nop") == 0)
-    {
-        nop(stack, line_number);
-    }
+	else if (strcmp(opcode, "nop") == 0)
+		nop(stack, line_number);
 	else
 	{
 		fprintf(stderr, "L%u: Error: Unknown instruction %s\n", line_number, opcode);

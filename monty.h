@@ -45,8 +45,7 @@ typedef struct global_info_s
 
 extern global_info_t global_info;
 
-void process_monty_instruction(char *instruction, stack_t **stack_head,
-unsigned int line_number);
+void process_monty_instruction(char *instruction, stack_t **stack_head, unsigned int line_number);
 void push(stack_t **stack, int n);
 void pall(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);

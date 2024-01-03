@@ -11,21 +11,19 @@ void execute_instruction(char *instruction, stack_t **stack,
 unsigned int line_number)
 {
 	char *opcode, *operand;
+
 	if (!instruction || !stack)
 	{
 		fprintf(stderr, "L%u: Error: Invalid instruction or stack\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-
 	opcode = strtok(instruction, " \t\n");
 	operand = strtok(NULL, " \t\n");
-
 	if (!opcode)
 	{
 		fprintf(stderr, "L%u: Error: Missing opcode\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-
 	if (strcmp(opcode, "push") == 0)
 	{
 		if (!operand || !is_numeric(operand))
@@ -44,9 +42,9 @@ unsigned int line_number)
 	else if (strcmp(opcode, "add") == 0)
 		add(stack, line_number);
 	else if (strcmp(opcode, "swap") == 0)
-	{
 		swap(stack, line_number);
-	}
+	else if (strcmp(opcode, "pop") == 0)
+		pop(stack, line_number);
 	else
 	{
 		fprintf(stderr, "L%u: Error: Unknown instruction %s\n", line_number, opcode);

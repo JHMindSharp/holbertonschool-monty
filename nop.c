@@ -6,8 +6,8 @@
  * @line_number: The current line number in the bytecode file.
  * Return: nothing
  */
-void nop(stack_t **head, unsigned int line_number)
+void nop(stack_t **stack, unsigned int line_number)
 {
 	(void) line_number;
-	(void) head;
+	(void) stack;
 }

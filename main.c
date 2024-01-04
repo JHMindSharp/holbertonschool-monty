@@ -9,7 +9,7 @@
  */
 int main(int argc, char *argv[])
 {
-
+	FILE *file;
 	stack_t *stack = NULL;
 	char *line = NULL;
 	size_t line_len = 0;
@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 
-	FILE *file = fopen(argv[1], "r");
+	file = fopen(argv[1], "r");
 
 	if (file == NULL)
 	{
@@ -35,10 +35,9 @@ int main(int argc, char *argv[])
 		line_number++;
 		execute_instruction(line, &stack, line_number);
 	}
-
-	free_stack(stack);
-	free(line);
 	fclose(file);
+	free(line);
+	free_stack(stack);
 
 	return (EXIT_SUCCESS);
 }

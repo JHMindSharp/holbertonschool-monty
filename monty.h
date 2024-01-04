@@ -48,7 +48,9 @@ void add(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
 int is_numeric(char *str);
 void execute_instruction(char *line, stack_t **stack,
-    unsigned int line_number);
+unsigned int line_number);
 void free_stack(stack_t *stack);
+void handle_error(unsigned int line_number, const char *message);
+void execute_push(stack_t **stack, char *operand, unsigned int line_number);
 
 #endif /* MONTY_H */

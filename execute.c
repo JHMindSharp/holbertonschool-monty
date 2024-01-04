@@ -1,18 +1,19 @@
 #include "monty.h"
 
 /**
- * process_monty_instruction - Process a Monty bytecode instruction.
- * @instruction: The Monty bytecode instruction to process.
+ * execute_monty_instruction - Execute a Monty bytecode instruction.
+ * @instruction: The Monty bytecode instruction to execute.
  * @stack_head: Pointer to the top of the stack.
  * @line_number: The current line number in the bytecode file.
  *
- * Description: This function extracts and processes Monty bytecode
- * instructions, including push, pall, pint, pop, swap, add, and nop.
- * It ensures correct opcode extraction and performs the corresponding
- * operations. If an unknown opcode is encountered, it prints an error
- * message and exits with failure.
+ * Description: This function executes Monty bytecode instructions based on
+ * the provided opcode. It calls the corresponding functions to perform
+ * the specified operations. If an unknown opcode is encountered, it prints
+ * an error message and exits with failure.
+ *
+ * Return: 1 if the instruction is executed successfully, 0 otherwise.
  */
-void process_monty_instruction(char *instruction, stack_t **stack_head,
+int execute_monty_instruction(char *instruction, stack_t **stack_head,
 unsigned int line_number)
 {
 	char *opcode = strtok(instruction, " \t\n");
@@ -21,7 +22,7 @@ unsigned int line_number)
 	if (!opcode)
 	{
 		fprintf(stderr, "L%u: Error: Missing opcode\n", line_number);
-		exit(EXIT_FAILURE);
+		return (0);
 	}
 
 	if (strcmp(opcode, "push") == 0)
@@ -30,7 +31,7 @@ unsigned int line_number)
 		if (!operand || !is_numeric(operand))
 		{
 			fprintf(stderr, "L%u: Error: usage: push integer\n", line_number);
-			exit(EXIT_FAILURE);
+			return (0);
 		}
 		push(stack_head, atoi(operand));
 	}
@@ -49,8 +50,10 @@ unsigned int line_number)
 	else
 	{
 		fprintf(stderr, "L%u: Error: Unknown instruction %s\n", line_number, opcode);
-		exit(EXIT_FAILURE);
+		return (0);
 	}
+
+	return (1);
 }
 
 /**
@@ -67,10 +70,11 @@ int is_numeric(const char *str)
 	if (str[0] == '-')
 		str++;
 
-	for (; *str; str++)
+	while (*str)
 	{
 		if (*str < '0' || *str > '9')
 			return (0);
+		str++;
 	}
 
 	return (1);

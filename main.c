@@ -16,6 +16,7 @@ int main(int argc, char *argv[])
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
+		cleanup(&global_info);
 		exit(EXIT_FAILURE);
 	}
 
@@ -23,6 +24,7 @@ int main(int argc, char *argv[])
 	if (!global_info.monty_file)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+		cleanup(&global_info);
 		exit(EXIT_FAILURE);
 	}
 
@@ -32,15 +34,19 @@ int main(int argc, char *argv[])
 		line_length = getline(&global_info.current_line, &line_size,
 			global_info.monty_file);
 		global_info.line_number++;
+
 		if (line_length > 0)
 		{
-			process_monty_instruction(global_info.current_line, &global_info.stack_head,
-				global_info.line_number);
+			if (execute_monty_instruction(global_info.current_line,
+				&global_info.stack_head,
+				global_info.line_number) == 0)
+			{
+				cleanup(&global_info);
+				return (EXIT_FAILURE);
+			}
 		}
 		free(global_info.current_line);
 	}
-
-	free_stack(global_info.stack_head);
-	fclose(global_info.monty_file);
+	cleanup(&global_info);
 	return (0);
 }

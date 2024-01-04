@@ -4,6 +4,7 @@
  * push - Pushes an element onto the stack.
  * @stack: Pointer to the top of the stack.
  * @n: integer
+ * @arg: arguments
  * Return: nothing
  */
 void push(stack_t **stack, unsigned int n, const char *arg)

@@ -1,80 +1,81 @@
 #include "monty.h"
 
 /**
- * execute_monty_instruction - Execute a Monty bytecode instruction.
- * @instruction: The Monty bytecode instruction to execute.
- * @stack_head: Pointer to the top of the stack.
- * @line_number: The current line number in the bytecode file.
- *
- * Description: This function executes Monty bytecode instructions based on
- * the provided opcode. It calls the corresponding functions to perform
- * the specified operations. If an unknown opcode is encountered, it prints
- * an error message and exits with failure.
- *
- * Return: 1 if the instruction is executed successfully, 0 otherwise.
+ * execute_instruction - Executes a Monty bytecode instruction
+ * @instruction: The instruction to execute
+ * @stack: Pointer to the top of the stack
+ * @line_number: The current line number in the bytecode file
+ * Return: nothing
  */
-int execute_monty_instruction(char *instruction, stack_t **stack_head,
+void execute_instruction(char *instruction, stack_t **stack,
 unsigned int line_number)
 {
-	char *opcode = strtok(instruction, " \t\n");
-	char *operand;
+	char *opcode, *operand;
+
+	if (!instruction || !stack)
+	{
+		fprintf(stderr, "L%u: Error: Invalid instruction or stack\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	opcode = strtok(instruction, " \t\n");
+	operand = strtok(NULL, " \t\n");
 
 	if (!opcode)
 	{
 		fprintf(stderr, "L%u: Error: Missing opcode\n", line_number);
-		return (0);
+		exit(EXIT_FAILURE);
 	}
 
 	if (strcmp(opcode, "push") == 0)
 	{
-		operand = strtok(NULL, " \t\n");
 		if (!operand || !is_numeric(operand))
 		{
 			fprintf(stderr, "L%u: Error: usage: push integer\n", line_number);
-			return (0);
+			exit(EXIT_FAILURE);
 		}
-		push(stack_head, atoi(operand));
+		int value = atoi(operand);
+
+		push(stack, value);
 	}
 	else if (strcmp(opcode, "pall") == 0)
-		pall(stack_head, line_number);
-	else if (strcmp(opcode, "pint") == 0)
-		pint(stack_head, line_number);
-	else if (strcmp(opcode, "pop") == 0)
-		pop(stack_head, line_number);
-	else if (strcmp(opcode, "swap") == 0)
-		swap(stack_head, line_number);
-	else if (strcmp(opcode, "add") == 0)
-		add(stack_head, line_number);
+		pall(stack, line_number);
 	else if (strcmp(opcode, "nop") == 0)
-		nop(stack_head, line_number);
+		nop(stack, line_number);
+	else if (strcmp(opcode, "add") == 0)
+		add(stack, line_number);
+	else if (strcmp(opcode, "swap") == 0)
+		swap(stack, line_number);
+	else if (strcmp(opcode, "pop") == 0)
+		pop(stack, line_number);
+	else if (strcmp(opcode, "pint") == 0)
+		pint(stack, line_number);
 	else
 	{
 		fprintf(stderr, "L%u: Error: Unknown instruction %s\n", line_number, opcode);
-		return (0);
+		exit(EXIT_FAILURE);
 	}
-
-	return (1);
 }
 
 /**
- * is_numeric - Check if a string is a numeric integer.
- * @str: The string to check.
- *
- * Return: 1 if the string is a valid numeric integer, 0 otherwise.
+ * is_numeric - Checks if a string is a numeric value
+ * @str: The string to check
+ * Return: 1 if numeric, 0 otherwise
  */
-int is_numeric(const char *str)
+int is_numeric(char *str)
 {
+	int i = 0;
+
 	if (!str)
 		return (0);
 
 	if (str[0] == '-')
-		str++;
+		i++;
 
-	while (*str)
+	for (; str[i]; i++)
 	{
-		if (*str < '0' || *str > '9')
+		if (str[i] < '0' || str[i] > '9')
 			return (0);
-		str++;
 	}
 
 	return (1);

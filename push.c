@@ -3,12 +3,10 @@
 /**
  * push - Pushes an element onto the stack.
  * @stack: Pointer to the top of the stack.
- * @n: The value to push onto the stack.
- *
- * Description: This function pushes an element with the given value onto the
- * top of the stack.
+ * @n: integer
+ * Return: nothing
  */
-void push(stack_t **stack, int n)
+void push(stack_t **stack, unsigned int n)
 {
 	stack_t *new_node = malloc(sizeof(stack_t));
 

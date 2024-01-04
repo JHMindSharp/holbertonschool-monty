@@ -7,7 +7,7 @@
  * @line_number: The current line number in the bytecode file
  * Return: nothing
  */
-void execute_instruction(char *instruction, stack_t **stack,
+int execute_instruction(char *instruction, stack_t **stack,
 unsigned int line_number)
 {
 	char *opcode, *operand;
@@ -15,7 +15,7 @@ unsigned int line_number)
 	if (!instruction || !stack)
 	{
 		fprintf(stderr, "L%u: Error: Invalid instruction or stack\n", line_number);
-		exit(EXIT_FAILURE);
+		return (0);
 	}
 
 	opcode = strtok(instruction, " \t\n");
@@ -24,7 +24,7 @@ unsigned int line_number)
 	if (!opcode)
 	{
 		fprintf(stderr, "L%u: Error: Missing opcode\n", line_number);
-		exit(EXIT_FAILURE);
+		return (0);
 	}
 
 	if (strcmp(opcode, "push") == 0)
@@ -53,8 +53,9 @@ unsigned int line_number)
 	else
 	{
 		fprintf(stderr, "L%u: Error: Unknown instruction %s\n", line_number, opcode);
-		exit(EXIT_FAILURE);
+		return(0);
 	}
+	return (1);
 }
 
 /**

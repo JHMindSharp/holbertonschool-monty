@@ -12,7 +12,7 @@ void execute_instruction(char *instruction, stack_t **stack,
 	char *opcode, *operand;
 
 	opcode = strtok(instruction, " \t\n");
-	operand = strtok(NULL, " \n");
+	operand = strtok(NULL, " \t\n");
 
 	if (!opcode)
 		return;

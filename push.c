@@ -12,7 +12,7 @@ void push(stack_t **stack, unsigned int n, const char *arg)
 	stack_t *new_node;
 	int num;
 
-	if (arg == NULL)
+	if (arg == NULL || !is_numeric(arg))
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", n);
 		exit(EXIT_FAILURE);

@@ -3,25 +3,32 @@
 /**
  * swap - Swaps the top two elements of the stack.
  * @stack: Pointer to the top of the stack.
- * @line_number: The current line number in the bytecode file.
+ * @line_number: Current line number in the bytecode file.
+ *
+ * Description:
+ * - This function represents the "swap" Monty bytecode instruction.
+ * - It swaps the positions of the top two elements on the stack.
+ * - The function receives a pointer to the stack and the current line number
+ * for potential error reporting.
+ *
+ * Return: None.
  */
 void swap(stack_t **stack, unsigned int line_number)
 {
-	stack_t *temp;
+	stack_t *tmp = NULL;
+	int tmp_n = 0;
 
-	if (*stack == NULL || (*stack)->next == NULL)
+	if (!stack || !*stack || !((*stack)->next))
 	{
-		fprintf(stderr, "L%u: Error: can't swap, stack too short\n", line_number);
+		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 
-	temp = (*stack)->next;
-	(*stack)->next = temp->next;
-	temp->next = *stack;
-	temp->prev = NULL;
+	tmp = *stack;
+	tmp_n = tmp->n;
+	tmp->n = tmp_n;
 
-	if ((*stack)->next != NULL)
-		(*stack)->next->prev = *stack;
+	tmp->n = tmp->next->n;
+	tmp->next->n = tmp_n;
 
-	*stack = temp;
 }

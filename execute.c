@@ -18,7 +18,7 @@ unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	opcode = strtok(instruction, " \t\n");
+	opcode = strtok(instruction, " \n");
 	operand = strtok(NULL, " \t\n");
 
 	if (!opcode)

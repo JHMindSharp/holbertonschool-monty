@@ -41,11 +41,7 @@ unsigned int line_number)
 	else if (strcmp(opcode, "pall") == 0)
 		pall(stack, line_number);
 	else if (strcmp(opcode, "nop") == 0)
-	{
-		if (strcmp(opcode, "nope") == 0)
-			nop(stack, line_number);
 		nop(stack, line_number);
-	}
 	else if (strcmp(opcode, "add") == 0)
 		add(stack, line_number);
 	else if (strcmp(opcode, "swap") == 0)
